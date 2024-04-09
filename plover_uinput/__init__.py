@@ -1,5 +1,12 @@
 from evdev import UInput, ecodes as e, util
+from symbols import generate_symbols
 from time import sleep
+
+# TODO: rewrite the entire thing like ̃~/devel/plover-output-dotool/plover_output_dotool/__init__.py
+# Put all the methods needed into the KeyboardEmulation class, and use symbols.py to get symbols
+# If keys has character then send_key key with no modifiers (the function should have a string input, that gets split into a list and read from the mods dictionary)
+# Else if symbols has character then send_key base_key with modifiers from the symbols dictionary generated
+# Else, do nothing because key is not defined
 
 mods = {
     "shift": e.KEY_LEFTSHIFT,
@@ -22,7 +29,7 @@ class Chord:
             [ecodes.KEY[i] for i in self.mods]
         )
 
-    # should probably be outside of the class
+    # TODO: should probably be outside of the class, and inside the KeyboardEmulation class instead
     def type(self, ui):
         for mod in self.mods:
             ui.write(e.EV_KEY, mod, 1)
@@ -30,6 +37,7 @@ class Chord:
         ui.write(e.EV_KEY, self.char, 0)
         for mod in self.mods:
             ui.write(e.EV_KEY, mod, 0)
+        # TODO: make this a variable defined by the set_key_press_delay() function
         sleep(0.001)
 
 
