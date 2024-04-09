@@ -1,7 +1,6 @@
 from evdev import UInput, ecodes as e, util
 from time import sleep
 
-
 mods = {
     "shift": e.KEY_LEFTSHIFT,
     "ctrl": e.KEY_LEFTCTRL,
@@ -106,10 +105,7 @@ keys = {
     ",": Chord(e.KEY_COMMA),
     "\b": Chord(e.KEY_BACKSPACE),
     "!": Chord(e.KEY_1, "shift"),
-    "[": Chord(e.KEY_8, "altgr"),  # Problem because different kb layouts
 }
-
-print(keys["e"])
 
 
 def type_string(ui, string):
