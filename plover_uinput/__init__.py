@@ -48,76 +48,49 @@ mods = {
 
 keys = {
     # Lowercase
-    "a": Chord(e.KEY_A),
-    "b": Chord(e.KEY_B),
-    "c": Chord(e.KEY_C),
-    "d": Chord(e.KEY_D),
-    "e": Chord(e.KEY_E),
-    "f": Chord(e.KEY_F),
-    "g": Chord(e.KEY_G),
-    "h": Chord(e.KEY_H),
-    "i": Chord(e.KEY_I),
-    "j": Chord(e.KEY_J),
-    "k": Chord(e.KEY_K),
-    "l": Chord(e.KEY_L),
-    "m": Chord(e.KEY_M),
-    "n": Chord(e.KEY_N),
-    "o": Chord(e.KEY_O),
-    "p": Chord(e.KEY_P),
-    "q": Chord(e.KEY_Q),
-    "r": Chord(e.KEY_R),
-    "s": Chord(e.KEY_S),
-    "t": Chord(e.KEY_T),
-    "u": Chord(e.KEY_U),
-    "v": Chord(e.KEY_V),
-    "w": Chord(e.KEY_W),
-    "x": Chord(e.KEY_X),
-    "y": Chord(e.KEY_Y),
-    "z": Chord(e.KEY_Z),
-    # Uppercase
-    "A": Chord(e.KEY_A, "shift_l"),
-    "B": Chord(e.KEY_B, "shift_l"),
-    "C": Chord(e.KEY_C, "shift_l"),
-    "D": Chord(e.KEY_D, "shift_l"),
-    "E": Chord(e.KEY_E, "shift_l"),
-    "F": Chord(e.KEY_F, "shift_l"),
-    "G": Chord(e.KEY_G, "shift_l"),
-    "H": Chord(e.KEY_H, "shift_l"),
-    "I": Chord(e.KEY_I, "shift_l"),
-    "J": Chord(e.KEY_J, "shift_l"),
-    "K": Chord(e.KEY_K, "shift_l"),
-    "L": Chord(e.KEY_L, "shift_l"),
-    "M": Chord(e.KEY_M, "shift_l"),
-    "N": Chord(e.KEY_N, "shift_l"),
-    "O": Chord(e.KEY_O, "shift_l"),
-    "P": Chord(e.KEY_P, "shift_l"),
-    "Q": Chord(e.KEY_Q, "shift_l"),
-    "R": Chord(e.KEY_R, "shift_l"),
-    "S": Chord(e.KEY_S, "shift_l"),
-    "T": Chord(e.KEY_T, "shift_l"),
-    "U": Chord(e.KEY_U, "shift_l"),
-    "V": Chord(e.KEY_V, "shift_l"),
-    "W": Chord(e.KEY_W, "shift_l"),
-    "X": Chord(e.KEY_X, "shift_l"),
-    "Y": Chord(e.KEY_Y, "shift_l"),
-    "Z": Chord(e.KEY_Z, "shift_l"),
+    "a": e.KEY_A,
+    "b": e.KEY_B,
+    "c": e.KEY_C,
+    "d": e.KEY_D,
+    "e": e.KEY_E,
+    "f": e.KEY_F,
+    "g": e.KEY_G,
+    "h": e.KEY_H,
+    "i": e.KEY_I,
+    "j": e.KEY_J,
+    "k": e.KEY_K,
+    "l": e.KEY_L,
+    "m": e.KEY_M,
+    "n": e.KEY_N,
+    "o": e.KEY_O,
+    "p": e.KEY_P,
+    "q": e.KEY_Q,
+    "r": e.KEY_R,
+    "s": e.KEY_S,
+    "t": e.KEY_T,
+    "u": e.KEY_U,
+    "v": e.KEY_V,
+    "w": e.KEY_W,
+    "x": e.KEY_X,
+    "y": e.KEY_Y,
+    "z": e.KEY_Z,
     # Numbers
-    "1": Chord(e.KEY_1),
-    "2": Chord(e.KEY_2),
-    "3": Chord(e.KEY_3),
-    "4": Chord(e.KEY_4),
-    "5": Chord(e.KEY_5),
-    "6": Chord(e.KEY_6),
-    "7": Chord(e.KEY_7),
-    "8": Chord(e.KEY_8),
-    "9": Chord(e.KEY_9),
-    "0": Chord(e.KEY_0),
+    "1": e.KEY_1,
+    "2": e.KEY_2,
+    "3": e.KEY_3,
+    "4": e.KEY_4,
+    "5": e.KEY_5,
+    "6": e.KEY_6,
+    "7": e.KEY_7,
+    "8": e.KEY_8,
+    "9": e.KEY_9,
+    "0": e.KEY_0,
     # Symbols
-    " ": Chord(e.KEY_SPACE),
-    ".": Chord(e.KEY_DOT),
-    ",": Chord(e.KEY_COMMA),
-    "-": Chord(e.KEY_MINUS),
-    "\b": Chord(e.KEY_BACKSPACE),
+    " ": e.KEY_SPACE,
+    ".": e.KEY_DOT,
+    ",": e.KEY_COMMA,
+    "-": e.KEY_MINUS,
+    "\b": e.KEY_BACKSPACE,
 }
 
 
@@ -160,17 +133,10 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(key, True)
         self._press_key(key, False)
 
-    def _send_chord(self, key):
-        for mod in key.mods:
-            self._ui.write(e.EV_KEY, mod, 1)
-        self._send_key(key.char)
-        for mod in key.mods:
-            self._ui.write(e.EV_KEY, mod, 0)
-
     def send_string(self, string):
-        chords = [keys[i] for i in list(string)]
-        for chord in chords:
-            self._send_chord(chord)
+        key_presses = [keys[i] for i in list(string)]
+        for key in key_presses:
+            self._send_key(key)
             sleep(self._delay)
         self._ui.syn()
 
