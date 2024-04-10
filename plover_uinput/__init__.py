@@ -177,8 +177,9 @@ class Main:
             log.warning(
                 "Stopping while Plover is running is unsupported - uninstall the plugin instead"
             )
+            self._engine._keyboard_emulation.stop()
         else:
             assert self._old_keyboard_emulation is not None
-            self._engine._keyboard_emulation = self._old_keyboard_emulation
             self._engine._keyboard_emulation.stop()
+            self._engine._keyboard_emulation = self._old_keyboard_emulation
             self._old_keyboard_emulation = None
