@@ -1,5 +1,6 @@
 from evdev import UInput, ecodes as e, util
-from symbols import generate_symbols
+
+# from symbols import generate_symbols
 from time import sleep
 
 from plover.oslayer.keyboardcontrol import KeyboardEmulation as OldKeyboardEmulation
