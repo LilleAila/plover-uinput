@@ -1,6 +1,7 @@
 from xkbcommon import xkb
 
 
+# also TODO: sometimes it outputs a modifier when not supposed to, for example the period key (this is the only one I noticed)
 # TODO: allow the layout to be defined by the user (environment variable? or gui?)
 # layout can be "no", "us", "gb", "fr" or any other xkb layout
 def generate_symbols(layout="no"):
