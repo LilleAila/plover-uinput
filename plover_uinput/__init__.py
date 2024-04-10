@@ -122,6 +122,9 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
     def cancel(self):
         pass
 
+    def stop(self):
+        self._ui.close()
+
     def set_key_press_delay(self, ms):
         if self._ms != ms:
             self._ms = ms
