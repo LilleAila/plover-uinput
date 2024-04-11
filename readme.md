@@ -9,3 +9,7 @@ Set the `PLOVER_UINPUT_LAYOUT` environment variable to your two-letter `xkb` key
 
 ## Unicode characters
 If you want to use unicode characters, `iBus` has to be installed.
+
+## Inspired by:
+- [halbGefressen/plover-output-dotool](https://github.com/halbGefressen/plover-output-dotool)
+- [svenkeidel/plover-wtype-output](https://github.com/svenkeidel/plover-wtype-output/tree/main)
