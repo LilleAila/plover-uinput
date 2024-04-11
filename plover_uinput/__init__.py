@@ -286,6 +286,9 @@ class Main:
         self._engine = engine
         self._old_keyboard_emulation = None
 
+    def _config_changed(config):
+        print(config)
+
     def start(self):
         if hasattr(self._engine, "_output"):
             pass
@@ -294,6 +297,7 @@ class Main:
             self._old_keyboard_emulation = self._engine._keyboard_emulation
             assert isinstance(self._old_keyboard_emulation, OldKeyboardEmulation)
             self._engine._keyboard_emulation = KeyboardEmulation()
+            self._engine.hook_connect("config_changed", self._config_changed)
 
     def stop(self):
         if hasattr(self._engine, "_output"):
