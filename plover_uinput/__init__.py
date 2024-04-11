@@ -131,10 +131,14 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         symbols = generate_symbols(layout)
         # Remove unwanted symbols from the table
         # Includes symbols such as numpad-star - use unicode instead
+        # There has to be a cleaner way to do this
+        syms_to_remove = []
         for sym in symbols:
             (base, _) = symbols[sym]
             if base not in keys:
-                symbols.pop(sym)
+                syms_to_remove.append(sym)
+        for sym in syms_to_remove:
+            symbols.pop(sym)
         self._symbols = symbols
 
     def set_key_press_delay(self, ms):
