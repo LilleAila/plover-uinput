@@ -154,6 +154,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(key, False)
 
     def _send_char(self, char):
+        print(char)
         # === Key can be sent directly ===
         if char in keys:
             self._send_key(char)
