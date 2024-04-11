@@ -154,16 +154,15 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(key, False)
 
     def _send_char(self, char):
-        print(char)
         # === Key can be sent directly ===
         if char in keys:
-            self._send_key(char)
+            self._send_key(keys[char])
         # === Key can be sent with a key combination ===
         elif char in self._symbols:
             (base, mods) = self._symbols[char]
             for mod in mods.split():
                 self._press_key(modifiers[mods], True)
-            self._send_key(base)
+            self._send_key(keys[base])
             for mod in mods.split():
                 self._press_key(modifiers[mods], False)
         # === Key must be sent with unicode ===
@@ -175,8 +174,9 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         sleep(self._delay)
 
     def send_string(self, string):
-        key_presses = [keys[i] for i in list(string)]
-        for key in key_presses:
+        # key_presses = [keys[i] for i in list(string)]
+        # for key in key_presses:
+        for key in list(string):
             self._send_char(key)
 
     def send_backspaces(self, num):
