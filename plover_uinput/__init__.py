@@ -176,7 +176,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
     def send_string(self, string):
         key_presses = [keys[i] for i in list(string)]
         for key in key_presses:
-            send_char(key)
+            self._send_char(key)
 
     def send_backspaces(self, num):
         for i in range(num):
