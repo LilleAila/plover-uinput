@@ -1,7 +1,6 @@
 from xkbcommon import xkb
 
 
-# also TODO: sometimes it outputs a modifier when not supposed to, for example the period key (this is the only one I noticed)
 # TODO: allow the layout to be defined by the user (environment variable? or gui?)
 # layout can be "no", "us", "gb", "fr" or any other xkb layout
 def generate_symbols(layout="no"):
@@ -13,9 +12,9 @@ def generate_symbols(layout="no"):
     # Modifier names from xkb, converted to strings
     level_mapping = {
         0: "",
-        1: "shift",
-        2: "altgr",
-        3: "shift altgr",
+        1: "shift_l",
+        2: "alt_r",
+        3: "shift_l alt_r",
     }
 
     symbols = {}
@@ -34,8 +33,6 @@ def generate_symbols(layout="no"):
             base_key = xkb.keysym_to_string(base_key_syms[0])
             if base_key is None:
                 continue
-            # symbols[base_key] = (base_key, "")
-            # === Base key symbol ===
 
             # === Key variations ===
             if levels < 1:  # There are no variations (Check maybe not needed)
@@ -50,12 +47,8 @@ def generate_symbols(layout="no"):
                 modifiers = level_mapping.get(level, "")
                 if not level_key in symbols:
                     symbols[level_key] = (base_key, modifiers)
-            # === Key variations ===
         except xkb.XKBInvalidKeycode:
             # Iter *should* return only valid, but still returns some invalid...
             pass
 
     return symbols
-
-
-syms = generate_symbols("no")
