@@ -286,7 +286,7 @@ class Main:
         self._engine = engine
         self._old_keyboard_emulation = None
 
-    def _config_changed(config):
+    def _config_changed(self, config):
         print(config)
 
     def start(self):
