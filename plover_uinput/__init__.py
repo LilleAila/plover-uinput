@@ -205,7 +205,6 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._ui.close()
 
     def _set_layout(self, layout):
-        print(layout)
         symbols = generate_symbols(layout)
         # Remove unwanted symbols from the table
         # Includes symbols such as numpad-star - use unicode instead
