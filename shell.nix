@@ -5,6 +5,8 @@
       xkbcommon
       setuptools
       plover
+      build
+      twine
     ]))
     black
     plover.dev

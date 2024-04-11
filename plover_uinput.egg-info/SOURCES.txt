@@ -1,0 +1,15 @@
+LICENSE
+pyproject.toml
+readme.md
+setup.cfg
+setup.py
+plover_uinput/__init__.py
+plover_uinput/all_keys.py
+plover_uinput/keys.py
+plover_uinput/symbols.py
+plover_uinput.egg-info/PKG-INFO
+plover_uinput.egg-info/SOURCES.txt
+plover_uinput.egg-info/dependency_links.txt
+plover_uinput.egg-info/entry_points.txt
+plover_uinput.egg-info/requires.txt
+plover_uinput.egg-info/top_level.txt
