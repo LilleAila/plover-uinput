@@ -5,6 +5,7 @@ from time import sleep
 
 from plover.oslayer.keyboardcontrol import KeyboardEmulation as OldKeyboardEmulation
 from plover import log
+import os  # To read the layout variable
 
 # If keys has character then send_key key with no modifiers (the function should have a string input, that gets split into a list and read from the mods dictionary)
 # Else if symbols has character then send_key base_key with modifiers from the symbols dictionary generated
@@ -189,9 +190,10 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._delay = self._ms / 1000
         self._res = util.find_ecodes_by_regex(r"KEY_.*")
         self._ui = UInput(self._res)
-        # TODO: make this update whenever the keyboard layout changes??
-        # And make this not be a hard-coded layout
-        self._set_layout("no")
+        # Set the keyboard layout from an environment variable
+        kb_env = "PLOVER_UINPUT_LAYOUT"
+        kb_layout = os.environ[kb_env] if kb_env in os.environ else "us"
+        self._set_layout(kb_layout)
 
     def start(self):
         start()
@@ -203,6 +205,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._ui.close()
 
     def _set_layout(self, layout):
+        print(layout)
         symbols = generate_symbols(layout)
         # Remove unwanted symbols from the table
         # Includes symbols such as numpad-star - use unicode instead
@@ -286,8 +289,8 @@ class Main:
         self._engine = engine
         self._old_keyboard_emulation = None
 
-    def _config_changed(self, config):
-        print(config)
+    # def _config_changed(self, config):
+    #     print(config)
 
     def start(self):
         if hasattr(self._engine, "_output"):
@@ -297,7 +300,7 @@ class Main:
             self._old_keyboard_emulation = self._engine._keyboard_emulation
             assert isinstance(self._old_keyboard_emulation, OldKeyboardEmulation)
             self._engine._keyboard_emulation = KeyboardEmulation()
-            self._engine.hook_connect("config_changed", self._config_changed)
+            # self._engine.hook_connect("config_changed", self._config_changed)
 
     def stop(self):
         if hasattr(self._engine, "_output"):
