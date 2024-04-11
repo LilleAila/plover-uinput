@@ -106,7 +106,7 @@ keys = {
     "tab": e.KEY_TAB,
     "backspace": e.KEY_BACKSPACE,
     "delete": e.KEY_DELETE,
-    "escape": e.KEY_ESCAPE,
+    "escape": e.KEY_ESC,
     "clear": e.KEY_CLEAR,
     # Navigation
     "up": e.KEY_UP,
