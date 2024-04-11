@@ -228,6 +228,17 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(key, True)
         self._press_key(key, False)
 
+    # Send unicode character (through iBus)
+    def _send_unicode(self, hex):
+        self._press_key(modifiers["control_l"], True)
+        self._press_key(modifiers["shift_l"], False)
+        self._send_key(keys["u"])
+        self._press_key(modifiers["control_l"], False)
+        self._press_key(modifiers["shift_l"], False)
+        self._ui.syn()
+        self._send_string(hex)
+        self._press_key(keys["\n"])
+
     def _send_char(self, char):
         # === Key can be sent directly ===
         if char in keys:
@@ -242,7 +253,9 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
                 self._press_key(modifiers[mods], False)
         # === Key must be sent with unicode ===
         else:
-            print("Unicode symbol output is not implemented")
+            # Convert to hex and remove leading "0x"
+            unicode_hex = hex(ord(char))[2:]
+            self._send_unicode(unicode_hex)
 
         # === Delay before next ===
         self._ui.syn()
