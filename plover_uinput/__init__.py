@@ -158,7 +158,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         if char in keys:
             self._send_key(char)
         # === Key can be sent with a key combination ===
-        elif key in self._symbols:
+        elif char in self._symbols:
             (base, mods) = self._symbols[char]
             for mod in mods.split():
                 self._press_key(modifiers[mods], True)
