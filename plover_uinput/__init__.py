@@ -243,18 +243,17 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(keys["\n"])
 
     def _send_char(self, char):
-        # === Key can be sent directly ===
-        if char in keys:
-            self._send_key(keys[char])
         # === Key can be sent with a key combination ===
-        elif char in self._symbols:
+        if char in self._symbols:
             (base, mods) = self._symbols[char]
             for mod in mods.split():
                 self._press_key(modifiers[mods], True)
             self._send_key(keys[base])
             for mod in mods.split():
                 self._press_key(modifiers[mods], False)
-        # === Key must be sent with unicode ===
+        # === Key can not be typed - send unicode symbol ===
+        # It would be better if it was possible to modify the layout to a custom one
+        # including all the needed symbols
         else:
             # Convert to hex and remove leading "0x"
             unicode_hex = hex(ord(char))[2:]
