@@ -240,7 +240,8 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(modifiers["shift_l"], False)
         self._ui.syn()
         self._send_string(hex)
-        self._press_key(keys["\n"])
+        self._send_key(keys["\n"])
+        self._ui.syn()
 
     def _send_char(self, char):
         # === Key can be sent with a key combination ===
