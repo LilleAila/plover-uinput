@@ -1,5 +1,7 @@
 # Plover output plugin for linux using uinput
 
+If you experience any problems, feel free to open an issue, pull request or send a message on discord (`lilleaila`)!
+
 ## Setup
 Add your user to the `input` group, and add this `udev` rule:
 ```
