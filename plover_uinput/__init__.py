@@ -226,22 +226,25 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
 
     def _press_key(self, key, state):
         self._ui.write(e.EV_KEY, key, 1 if state else 0)
+        self._ui.syn()
 
     def _send_key(self, key):
         self._press_key(key, True)
         self._press_key(key, False)
+        self._ui.syn()
 
     # Send unicode character (through iBus)
     def _send_unicode(self, hex):
         self._press_key(modifiers["control_l"], True)
         self._press_key(modifiers["shift_l"], False)
+        sleep(self._delay)
         self._send_key(keys["u"])
+        sleep(self._delay)
         self._press_key(modifiers["control_l"], False)
         self._press_key(modifiers["shift_l"], False)
-        self._ui.syn()
+        sleep(self._delay)
         self._send_string(hex)
         self._send_key(keys["\n"])
-        self._ui.syn()
 
     def _send_char(self, char):
         # === Key can be sent with a key combination ===
@@ -249,9 +252,11 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
             (base, mods) = self._symbols[char]
             for mod in mods.split():
                 self._press_key(modifiers[mods], True)
+            sleep(self._delay)
             self._send_key(keys[base])
             for mod in mods.split():
                 self._press_key(modifiers[mods], False)
+            sleep(self._delay)
         # === Key can not be typed - send unicode symbol ===
         # It would be better if it was possible to modify the layout to a custom one
         # including all the needed symbols
@@ -261,7 +266,6 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
             self._send_unicode(unicode_hex)
 
         # === Delay before next ===
-        self._ui.syn()
         sleep(self._delay)
 
     def send_string(self, string):

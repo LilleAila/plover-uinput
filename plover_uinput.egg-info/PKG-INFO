@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: plover-uinput
-Version: 0.0.3
+Version: 0.0.4
 Summary: Plover output plugin for linux using evdev / uinput
 Home-page: https://github.com/LilleAila/plover-uinput
 Author: LilleAila
@@ -14,6 +14,8 @@ Requires-Dist: evdev>=1.7.0
 Requires-Dist: xkbcommon>=0.8
 
 # Plover output plugin for linux using uinput
+
+If you experience any problems, feel free to open an issue, pull request or send a message on discord (`lilleaila`)!
 
 ## Setup
 Add your user to the `input` group, and add this `udev` rule:
