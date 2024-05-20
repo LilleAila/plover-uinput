@@ -243,7 +243,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(modifiers["control_l"], False)
         self._press_key(modifiers["shift_l"], False)
         sleep(self._delay)
-        self._send_string(hex)
+        self.send_string(hex)
         self._send_key(keys["\n"])
 
     def _send_char(self, char):
