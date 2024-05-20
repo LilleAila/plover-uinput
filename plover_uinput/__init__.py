@@ -37,12 +37,16 @@ except ImportError:
 modifiers = {
     "alt_l": e.KEY_LEFTALT,
     "alt_r": e.KEY_RIGHTALT,
+    "alt": e.KEY_LEFTALT,
     "control_l": e.KEY_LEFTCTRL,
     "control_r": e.KEY_RIGHTCTRL,
+    "control": e.KEY_LEFTCTRL,
     "shift_l": e.KEY_LEFTSHIFT,
     "shift_r": e.KEY_RIGHTSHIFT,
+    "shift": e.KEY_LEFTSHIFT,
     "super_l": e.KEY_LEFTMETA,
     "super_r": e.KEY_RIGHTMETA,
+    "super": e.KEY_LEFTMETA,
 }
 
 
@@ -244,6 +248,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         self._press_key(modifiers["shift_l"], False)
         sleep(self._delay)
         self.send_string(hex)
+        sleep(self._delay)
         self._send_key(keys["\n"])
 
     def _send_char(self, char):
