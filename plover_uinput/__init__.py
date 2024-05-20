@@ -240,7 +240,7 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
     # Send unicode character (through iBus)
     def _send_unicode(self, hex):
         self._press_key(modifiers["control_l"], True)
-        self._press_key(modifiers["shift_r"], False)
+        self._press_key(modifiers["shift_r"], True)
         sleep(self._delay)
         self._send_key(keys["u"])
         sleep(self._delay)
