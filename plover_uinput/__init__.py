@@ -1,3 +1,7 @@
+# Notes for building and deploying:
+# `python3 -m build` REMEMBER TO CHANGE VERSION NUMBER FIRST
+# `twine upload dist/*`
+
 from evdev import UInput, ecodes as e, util
 
 from .symbols import generate_symbols
@@ -6,10 +10,6 @@ from time import sleep
 from plover.oslayer.keyboardcontrol import KeyboardEmulation as OldKeyboardEmulation
 from plover import log
 import os  # To read the layout variable
-
-# If keys has character then send_key key with no modifiers (the function should have a string input, that gets split into a list and read from the mods dictionary)
-# Else if symbols has character then send_key base_key with modifiers from the symbols dictionary generated
-# Else, input unicode
 
 # === Import or create `parse_key_combo` function ===
 try:
@@ -179,6 +179,22 @@ keys = {
     "AudioRewind": e.KEY_REWIND,
     "KbdBrightnessUp": e.KEY_KBDILLUMUP,
     "KbdBrightnessDown": e.KEY_KBDILLUMDOWN,
+    # Different cased duplicates may be unnecessary
+    # Possible solution if it causes errors: use lowercase string when getting keycodes from here
+    "BackSpace": e.KEY_BACKSPACE,
+    "Delete": e.KEY_DELETE,
+    "Up": e.KEY_UP,
+    "Down": e.KEY_DOWN,
+    "Left": e.KEY_LEFT,
+    "Right": e.KEY_RIGHT,
+    "Home": e.KEY_HOME,
+    "Insert": e.KEY_INSERT,
+    "End": e.KEY_END,
+    "Tab": e.KEY_TAB,
+    "Page_Up": e.KEY_PAGEUP,
+    "Page_Down": e.KEY_PAGEDOWN,
+    "Space": e.KEY_SPACE,
+    "space": e.KEY_SPACE,
 }
 
 

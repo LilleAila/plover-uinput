@@ -1,9 +1,8 @@
 from xkbcommon import xkb
 
 
-# TODO: allow the layout to be defined by the user (environment variable? or gui?)
 # layout can be "no", "us", "gb", "fr" or any other xkb layout
-def generate_symbols(layout="no"):
+def generate_symbols(layout="us"):
     ctx = xkb.Context()
     keymap = ctx.keymap_new_from_names(layout=layout)
     # The keymaps have to be "translated" to a US layout keyboard for evdev
