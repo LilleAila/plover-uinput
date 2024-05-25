@@ -190,6 +190,7 @@ keys = {
     "Home": e.KEY_HOME,
     "Insert": e.KEY_INSERT,
     "End": e.KEY_END,
+    "end": e.KEY_END,
     "Tab": e.KEY_TAB,
     "Page_Up": e.KEY_PAGEUP,
     "Page_Down": e.KEY_PAGEDOWN,
