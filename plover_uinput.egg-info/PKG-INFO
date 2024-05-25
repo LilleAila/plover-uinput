@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: plover-uinput
-Version: 0.0.11
+Version: 0.0.12
 Summary: Plover output plugin for linux using evdev / uinput
 Home-page: https://github.com/LilleAila/plover-uinput
 Author: LilleAila

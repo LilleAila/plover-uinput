@@ -120,6 +120,10 @@ keys = {
     "right": e.KEY_RIGHT,
     "page_up": e.KEY_PAGEUP,
     "page_down": e.KEY_PAGEDOWN,
+    "home": e.KEY_HOME,
+    "insert": e.KEY_INSERT,
+    "end": e.KEY_END,
+    "space": e.KEY_SPACE,
     # Function keys
     "fn": e.KEY_FN,
     "f1": e.KEY_F1,
@@ -166,36 +170,19 @@ keys = {
     "kp_multiply": e.KEY_KPASTERISK,
     "kp_subtract": e.KEY_KPMINUS,
     # Media keys
-    "AudioRaiseVolume": e.KEY_VOLUMEUP,
-    "AudioLowerVolume": e.KEY_VOLUMEDOWN,
-    "MonBrightnessUp": e.KEY_BRIGHTNESSUP,
-    "MonBrightnessDown": e.KEY_BRIGHTNESSDOWN,
-    "AudioMute": e.KEY_MUTE,
-    "Num_Lock": e.KEY_NUMLOCK,
-    "Eject": e.KEY_EJECTCD,
-    "AudioPause": e.KEY_PAUSE,
-    "AudioPlay": e.KEY_PLAY,
-    "AudioNext": e.KEY_NEXT,  # Maybe VIDEO_NEXT or NEXTSONG
-    "AudioRewind": e.KEY_REWIND,
-    "KbdBrightnessUp": e.KEY_KBDILLUMUP,
-    "KbdBrightnessDown": e.KEY_KBDILLUMDOWN,
-    # Different cased duplicates may be unnecessary
-    # Possible solution if it causes errors: use lowercase string when getting keycodes from here
-    "BackSpace": e.KEY_BACKSPACE,
-    "Delete": e.KEY_DELETE,
-    "Up": e.KEY_UP,
-    "Down": e.KEY_DOWN,
-    "Left": e.KEY_LEFT,
-    "Right": e.KEY_RIGHT,
-    "Home": e.KEY_HOME,
-    "Insert": e.KEY_INSERT,
-    "End": e.KEY_END,
-    "end": e.KEY_END,
-    "Tab": e.KEY_TAB,
-    "Page_Up": e.KEY_PAGEUP,
-    "Page_Down": e.KEY_PAGEDOWN,
-    "Space": e.KEY_SPACE,
-    "space": e.KEY_SPACE,
+    "audioraisevolume": e.KEY_VOLUMEUP,
+    "audiolowervolume": e.KEY_VOLUMEDOWN,
+    "monbrightnessup": e.KEY_BRIGHTNESSUP,
+    "monbrightnessdown": e.KEY_BRIGHTNESSDOWN,
+    "audiomute": e.KEY_MUTE,
+    "num_lock": e.KEY_NUMLOCK,
+    "eject": e.KEY_EJECTCD,
+    "audiopause": e.KEY_PAUSE,
+    "audioplay": e.KEY_PLAY,
+    "audionext": e.KEY_NEXT,  # Maybe VIDEO_NEXT or NEXTSONG
+    "audiorewind": e.KEY_REWIND,
+    "kbdbrightnessup": e.KEY_KBDILLUMUP,
+    "kbdbrightnessdown": e.KEY_KBDILLUMDOWN,
 }
 
 
@@ -306,7 +293,11 @@ class KeyboardEmulation(*([KeyboardEmulationBase] if have_output_plugin else [])
         key_events = parse_key_combo(combo_string)
 
         for key, pressed in key_events:
-            k = modifiers[key] if key in modifiers else keys[key]
+            k = (
+                modifiers[key.lower()]
+                if key.lower() in modifiers
+                else keys[key.lower()]
+            )
             self._press_key(k, pressed)
 
 
