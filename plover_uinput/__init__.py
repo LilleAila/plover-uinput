@@ -124,6 +124,7 @@ keys = {
     "insert": e.KEY_INSERT,
     "end": e.KEY_END,
     "space": e.KEY_SPACE,
+    "print": e.KEY_PRINT,
     # Function keys
     "fn": e.KEY_FN,
     "f1": e.KEY_F1,
