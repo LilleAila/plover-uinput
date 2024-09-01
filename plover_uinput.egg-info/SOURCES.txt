@@ -5,6 +5,7 @@ setup.cfg
 setup.py
 plover_uinput/__init__.py
 plover_uinput/all_keys.py
+plover_uinput/keyboard_capture.py
 plover_uinput/keys.py
 plover_uinput/symbols.py
 plover_uinput.egg-info/PKG-INFO
