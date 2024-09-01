@@ -23,3 +23,4 @@ If you encounter any other problems, feel free to open an issue, pull request or
 - [ ] Implement keyboard capture
 - [ ] Make it easier to install udev rules
 - [ ] Add a github action for publishing to PyPi
+- [ ] Clean up the code, remove some random files that are not parts of the plugin itself
