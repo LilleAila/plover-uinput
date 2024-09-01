@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: plover-uinput
-Version: 0.0.14
+Version: 0.0.15
 Summary: Plover output plugin for linux using evdev / uinput
 Home-page: https://github.com/LilleAila/plover-uinput
 Author: LilleAila
@@ -11,7 +11,7 @@ Description-Content-Type: text/markdown
 License-File: LICENSE
 Requires-Dist: plover>=4.0.0rc2
 Requires-Dist: evdev>=1.7.0
-Requires-Dist: xkbcommon>=0.8
+Requires-Dist: xkbcommon<1.1
 
 # Plover output plugin for linux using uinput
 This plugin directly emulates the keyboard using uinput, which is present on most linux distributions. This means that it will work on X11, wayland and even in the tty.
